@@ -1,0 +1,22 @@
+<!Doctype html>
+<html>
+<head></head>
+
+<title>Trillaint Jira Issue Search</title>
+<h1>Enter Issue Number:</h1>
+<select id="issue_type">
+  <option value="DRVX">DRVX</option>
+  <option value="UNC">UNC</option>
+</select>
+<input type="text" id="user_input" placeholder="Bug Number"></input>
+<input type="submit" onClick="search_issue()" value="Search">
+
+<script type="text/javascript">
+  function search_issue(){
+  var issue_list = document.getElementById("issue_type");
+  var issue_type = issue_list.options[issue_list.selectedIndex].value;
+  var issue_number = document.getElementById("user_input").value;
+  window.location.assign('https://jira.trilliant.local/browse/'+issue_type+'-'+issue_number);
+  }
+</script>
+</html>
