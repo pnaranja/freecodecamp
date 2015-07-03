@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+       <script type="text/javascript">
+        function bouncer(arr){
+            return arr.filter(function(x){
+                return x; 
+            });
+        }
+
+        document.writeln("Function Bouncer output:\n ",bouncer([7,'ate','',false,9]));
+
+        function obj_equals(obj1,obj2){
+            var ret = true;
+            Object.keys(obj1).forEach{function(key){
+               if(obj1[key] != obj2[key]) ret = false; 
+            }
+            return ret; 
+        }
+
+        function where(arr_objs,src){
+            var src_key = Object.keys(src)[0];
+            var ret = [];
+           arr_objs.forEach(function(obj){
+               if(obj[src_key] == src[src_key]))
+                ret.push(obj);
+           }) 
+            return ret;
+        }
+        
+        document.writeln("Function where output: \n",
+                         where([{first:'Romeo',last:'Montague'}, {first:'Mercutio',last:null}, {first:'Tybalt',last:'Capulet'}]));
+                
+       
+        </script>
+ 
+    </body>
+
+</html>
