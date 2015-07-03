@@ -10,4 +10,5 @@ function destroyer(arr){
     return new_arr;
      }
 
-destroyer([1,2,3],2);
+destroyer([1,2,3,4],4);
+destroyer(['a','n','l'],'l');
