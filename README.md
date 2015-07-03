@@ -1,2 +1,2 @@
 # freecodecamp
-Projects and exercises done for freecodecamp.com
+Projects and exercises that are done for freecodecamp.com
