@@ -1,3 +1,11 @@
+//Design a cash register drawer function that accepts purchase price as the first argument, payment as the second argument, and cash-in-drawer (cid) as the third argument.
+//
+//cid is a 2d array listing available currency.
+//
+//Return the string "Insufficient Funds" if cash-in-drawer is less than the change due. Return the string "Closed" if cash-in-drawer is equal to the change due.
+//
+//Otherwise, return change in coin and bills, sorted in highest to lowest order.
+
 function drawer(price, cash, cid) {
   var total_cid = function(){
     var reduced_arr =  cid.reduce(function(prev,curr){
@@ -31,42 +39,45 @@ function drawer(price, cash, cid) {
 
   //Retrieve the denom array from cid
   var retrieve_denom_array = function(denom){
-    var ret = '';
+    var end = 0;
     cid.forEach(function(arr){
-      if (denom === arr[0]) ret = arr;
+      if (denom === arr[0]) var end = cid.indexOf(arr);
     });
-    return ret;
+    return cid.slice(0,end+1).reverse();
   };
  
   //While denomination amt > 0 OR change > 0:
   // - Subtract denomination from change
   // - Subtract denomination from amt of denomination
   // - Create array of ['denom', amt subtracted]
-  var denom_change = function(denom, denom_arr){
+  var denom_change = function(denom_arr){
+    var denom = denom_arr[0];
 
     var acc = function(denom_arr, ret_arr){
       if (change === 0 || denom_arr[1] === 0) return ret_arr;
-      change=-denom_value[denom];
-      return acc([denom_arr[0], denom_arr[1]-denom_value[denom]], 
+      change =- denom_value[denom];
+      return acc([denom, denom_arr[1]-denom_value[denom]], 
                  [ret_arr[0], ret_arr[1]+denom_value[denom]]);
     };
     return acc(denom_arr, [denom,0]);
   };
 
+//Main Code
   //If change is still >0: 
   // - Push denom array to return array
   // - Move to the next denomination
+
+  //var total_change = [];
+  //var current_denom = retrieve_denom_array(greatest_denom);
+  //for (var i = 0; i<current_denom.length; i++){
+  //    if (change === 0) break;
+  //    total_change.push(denom_change(current_denom[i]));
+  //}
+  
+  //return total_change;
+  return denom_change(['QUARTER', 4.25]);
+
 }
 
-// Example cash-in-drawer array:
-// [['PENNY', 1.01],
-// ['NICKEL', 2.05],
-// ['DIME', 3.10],
-// ['QUARTER', 4.25],
-// ['ONE', 90.00],
-// ['FIVE', 55.00],
-// ['TEN', 20.00],
-// ['TWENTY', 60.00],
-// ['ONE HUNDRED', 100.00]]
 
 drawer(19.50, 20.00, [['PENNY', 1.01], ['NICKEL', 2.05], ['DIME', 3.10], ['QUARTER', 4.25], ['ONE', 90.00], ['FIVE', 55.00], ['TEN', 20.00], ['TWENTY', 60.00], ['ONE HUNDRED', 100.00]]);
