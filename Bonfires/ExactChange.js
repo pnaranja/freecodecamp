@@ -41,7 +41,7 @@ function drawer(price, cash, cid) {
   var retrieve_denom_array = function(denom){
     var end = 0;
     cid.forEach(function(arr){
-      if (denom === arr[0]) var end = cid.indexOf(arr);
+      if (denom === arr[0]) end = cid.indexOf(arr);
     });
     return cid.slice(0,end+1).reverse();
   };
@@ -55,7 +55,7 @@ function drawer(price, cash, cid) {
 
     var acc = function(denom_arr, ret_arr){
       if (change === 0 || denom_arr[1] === 0) return ret_arr;
-      change =- denom_value[denom];
+      change = change - denom_value[denom];
       return acc([denom, denom_arr[1]-denom_value[denom]], 
                  [ret_arr[0], ret_arr[1]+denom_value[denom]]);
     };
@@ -67,15 +67,15 @@ function drawer(price, cash, cid) {
   // - Push denom array to return array
   // - Move to the next denomination
 
-  //var total_change = [];
-  //var current_denom = retrieve_denom_array(greatest_denom);
-  //for (var i = 0; i<current_denom.length; i++){
-  //    if (change === 0) break;
-  //    total_change.push(denom_change(current_denom[i]));
-  //}
+  var total_change = [];
+  var current_denom = retrieve_denom_array(greatest_denom);
+  for (var i = 0; i<current_denom.length; i++){
+      if (change === 0) break;
+      total_change.push(denom_change(current_denom[i]));
+  }
   
-  //return total_change;
-  return denom_change(['QUARTER', 4.25]);
+  return total_change;
+  //return denom_change(['QUARTER', 4.25]);
 
 }
 
