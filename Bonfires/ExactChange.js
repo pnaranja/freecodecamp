@@ -50,17 +50,31 @@ function drawer(price, cash, cid) {
   // - Subtract denomination from change
   // - Subtract denomination from amt of denomination
   // - Create array of ['denom', amt subtracted]
-  var denom_change = function(denom_arr){
-    var denom = denom_arr[0];
+  // **Using trampoline method so stack does not get overloaded**
 
-    var acc = function(denom_arr, ret_arr){
-      if (change === 0 || denom_arr[1] === 0) return ret_arr;
-      change = change - denom_value[denom];
-      return acc([denom, denom_arr[1]-denom_value[denom]], 
-                 [ret_arr[0], ret_arr[1]+denom_value[denom]]);
-    };
-    return acc(denom_arr, [denom,0]);
+  var trampoline = function(fn){
+    while (fn instanceof Function){
+      fn = fn();
+    }
+    return fn;
   };
+
+  var denom_change = function(denom_arr){
+        var denom = denom_arr[0];
+
+        var acc = function(denom_arr, ret_arr){
+            if (change === 0 || denom_arr[1] === 0){ 
+                console.log(ret_arr);
+                return ret_arr;
+                
+            }
+            change = change - denom_value[denom];
+            return acc([denom, denom_arr[1]-denom_value[denom]],
+                    [ret_arr[0], ret_arr[1]+denom_value[denom]]);
+        };
+        return trampoline(acc(denom_arr, [denom,0]));
+  };
+
 
 //Main Code
   //If change is still >0: 
@@ -69,8 +83,7 @@ function drawer(price, cash, cid) {
 
   var total_change = [];
   var current_denom = retrieve_denom_array(greatest_denom);
-  for (var i = 0; i<current_denom.length; i++){
-      if (change === 0) break;
+  for (var i = 0; i<current_denom.length && change !== 0; i++){
       total_change.push(denom_change(current_denom[i]));
   }
   
