@@ -1,19 +1,40 @@
+.background-image{
+    background-image:url(http://wallpaper-download.net/wallpapers/snow-wallpapers-snow-mountains-wallpaper-wallpaper-34845.jpg);
+    background-attachment:local;
+    background-size:cover;
+}
 .h-menu{
     margin:auto;
-    text-align:right;
     color:gray;
     font-size: medium;
     background-color: #F0F0F0;
-    padding: 15px;
     border: 0;
     margin: 0;
 }
 
 .h-menu-strip{
+    word-spacing: 2px;
     width: 350px;
     padding: 10px;
     border: 0;
     margin: 0;
     background-color: #C8C8C8;
     color: black;
+}
+
+.h-menu-name{
+    float:left;
+    padding: 10px;
+    border: 0;
+    margin: 0;
+}
+
+.h-menu-span{
+    padding: 10px;
+    border: 0;
+    margin: 0;
+}
+
+.h-menu-span:hover{
+    background-color: #707070;
 }
