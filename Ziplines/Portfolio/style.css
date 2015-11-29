@@ -38,3 +38,18 @@
 .h-menu-span:hover{
     background-color: #707070;
 }
+
+.intro{
+    position: relative;
+    top: 200px;
+    color: black; 
+}
+
+.greeting{
+    font-size: 70px;
+    font-weight: 500;
+}
+
+.greeting2{
+    font-size: 30px;
+}
