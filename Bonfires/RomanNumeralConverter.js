@@ -28,5 +28,8 @@ function convert(num){
         {4:[Small,Mid]}, {5:[Mid]}, {6:[Mid,Small]}, {7:[Mid,Small,Small]}, {8:[Mid,Small,Small,Small]}
         {9:[Mid,Large]}};
 
+    //num -> array of numbers
+    let num_array = num.toString().split("").map(x=>Number(x))
+
     return num;
 }
